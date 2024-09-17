@@ -1,0 +1,76 @@
+<!-- src/app/components/signup/signup.component.html -->
+
+<div class="signup-container">
+    <h2>Signup</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="username">Username:</label>
+        <input id="username" type="text" formControlName="username">
+        <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched">
+          <small *ngIf="signupForm.get('username')?.errors?.['required']">Username is required.</small>
+          <small *ngIf="signupForm.get('username')?.errors?.['minlength']">Username must be at least 3 characters long.</small>
+        </div>
+      </div>
+    
+      <div>
+        <label for="password">Password:</label>
+        <input id="password" type="password" formControlName="password">
+        <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+          <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</small>
+          <small *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</small>
+          <small *ngIf="signupForm.get('password')?.errors?.['passwordStrength']">Password must contain uppercase, lowercase, and numeric characters.</small>
+        </div>
+      </div>
+    
+      <div>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input id="confirmPassword" type="password" formControlName="confirmPassword">
+        <div *ngIf="signupForm.errors?.['passwordMismatch'] && signupForm.get('confirmPassword')?.touched">
+          <small>Passwords do not match.</small>
+        </div>
+      </div>
+    
+      <div>
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email">
+        <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+          <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</small>
+          <small *ngIf="signupForm.get('email')?.errors?.['email']">Enter a valid email address.</small>
+        </div>
+      </div>
+    
+      <div>
+        <label for="phone_number">Phone Number:</label>
+        <input id="phone_number" type="tel" formControlName="phone_number">
+        <div *ngIf="signupForm.get('phone_number')?.invalid && signupForm.get('phone_number')?.touched">
+          <small *ngIf="signupForm.get('phone_number')?.errors?.['required']">Phone number is required.</small>
+          <small *ngIf="signupForm.get('phone_number')?.errors?.['pattern']">Enter a valid phone number.</small>
+        </div>
+      </div>
+    
+      <div>
+        <label for="carrier">Carrier:</label>
+        <input id="carrier" type="text" formControlName="carrier">
+        <div *ngIf="signupForm.get('carrier')?.invalid && signupForm.get('carrier')?.touched">
+          <small *ngIf="signupForm.get('carrier')?.errors?.['required']">Carrier is required.</small>
+        </div>
+      </div>
+    
+      <div>
+        <label for="monthly_payment">Monthly Payment:</label>
+        <input id="monthly_payment" type="number" formControlName="monthly_payment">
+        <div *ngIf="signupForm.get('monthly_payment')?.invalid && signupForm.get('monthly_payment')?.touched">
+          <small *ngIf="signupForm.get('monthly_payment')?.errors?.['required']">Monthly payment is required.</small>
+          <small *ngIf="signupForm.get('monthly_payment')?.errors?.['min']">Monthly payment must be a positive number.</small>
+          <small *ngIf="signupForm.get('monthly_payment')?.errors?.['invalidMonthlyPayment']">Monthly payment must be between 0 and 1000.</small>
+        </div>
+      </div>
+    
+      <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+    </form>
+    
+    <div *ngIf="signupError" class="error">
+      {{ signupError }}
+    </div>
+
+</div>
