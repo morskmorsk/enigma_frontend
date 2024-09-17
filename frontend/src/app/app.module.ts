@@ -1,35 +1,41 @@
-// app.module.ts is the root module of the Angular application.
-// It is the first file that is executed when the application is started.
-// It is responsible for bootstrapping the application and loading the necessary modules.
-// In this file, you need to import the HttpClientModule module from @angular/common/http.
-// This module provides the necessary services to make HTTP requests.
-// You can import the HttpClientModule module in the imports array of the @NgModule decorator.
-
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+// Material Imports
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    /* ... */
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
-    /* ... */
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
+    AppRoutingModule,  // This should include RouterModule.forRoot(routes)
+    BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule
   ],
   providers: [
-    /* ... */
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

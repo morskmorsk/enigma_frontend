@@ -1,7 +1,16 @@
-<nav>
-  <a routerLink="/login">Login</a> |
-  <a routerLink="/signup">Signup</a> |
-  <a routerLink="/products">Products</a>
-</nav>
+<mat-toolbar color="primary">
+  <span>My App</span>
+  <span class="spacer"></span>
+  <ng-container *ngIf="(isAuthenticated$ | async) === false; else authenticatedNav">
+    <a mat-button routerLink="/login" routerLinkActive="active">Login</a>
+    <a mat-button routerLink="/signup" routerLinkActive="active">Signup</a>
+  </ng-container>
+  <ng-template #authenticatedNav>
+    <a mat-button routerLink="/products" routerLinkActive="active">Products</a>
+    <button mat-button (click)="logout()">Logout</button>
+  </ng-template>
+</mat-toolbar>
 
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
